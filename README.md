@@ -14,7 +14,7 @@
 ```plaintext
 sapamercat/
 ├── controlador/
-│   ├── Sapamercat.java  # Classe principal
+│   ├── Controlador.java # Classe controlador
 ├── model/producte/
 │   ├── Producte.java    # Classe abstracta
 │   ├── Alimentacio.java # Producte d'alimentació
@@ -23,6 +23,7 @@ sapamercat/
 │   ├── Model.java       # Gestió de productes
 ├── vista/
 │   ├── Vista.java       # Menús i visualització
+├── Main.java            # Main
 ```
 
 ## 🛠️ Tecnologies utilitzades
