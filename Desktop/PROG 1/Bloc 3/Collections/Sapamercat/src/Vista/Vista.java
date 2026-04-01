@@ -1,26 +1,36 @@
 package Vista;
 
+import Model.*;
+
+import java.util.Scanner;
+
+// Classe per mostrar menús i interacció amb l’usuari
 public class Vista {
-<<<<<<< HEAD
 
     public Scanner sc = new Scanner(System.in);
 
     public void menuPrincipal(){
-        System.out.println("BENVINGUT AL SAPAMERCAT");
-        System.out.println("-- INICI");
-        System.out.println("1) Introduir producte 2) Passar per caixa");
+
+        System.out.println("-- BENVINGUT AL SAPAMERCAT --");
+        System.out.println("-----------");
+        System.out.println("-- INICI --");
+        System.out.println("-----------");
+        System.out.println("1) Introduir producte");
+        System.out.println("2) Passar per caixa");
         System.out.println("3) Mostrar carret de compra");
         System.out.println("0) Acabar");
-        System.out.print("> ");
+
     }
 
     public void menuProducte(){
-        System.out.println("-- PRODUCTE");
+        System.out.println("-----------");
+        System.out.println("-- PRODUCTE --");
+        System.out.println("-----------");
         System.out.println("1) Alimentació");
         System.out.println("2) Tèxtil");
         System.out.println("3) Electrònica");
         System.out.println("0) Tornar");
-        System.out.print("> ");
+
     }
 
     public Alimentacio llegirAlimentacio(){
@@ -62,6 +72,3 @@ public class Vista {
         return new Electronica(nom, preu, codi, dies);
     }
 }
-=======
-}
->>>>>>> parent of 0e8d823 (Comentades totes les funcions i codi en primera persona per claritat)

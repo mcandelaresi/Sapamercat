@@ -1,5 +1,6 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 // Classe per gestionar el carret de la compra
@@ -8,7 +9,7 @@ public class CarretCompra {
     private List<Producte> productes;
 
     public CarretCompra() {
-        // Inicialitzo la llista
+        // He inicialitzat la llista de productes
         productes = new ArrayList<>();
     }
 
@@ -17,42 +18,69 @@ public class CarretCompra {
         productes.add(p);
     }
 
-    // Mostro productes amb la sortida
+
+    // Mostro contingut del carret amb format bonic
     public void mostrarCarret() {
-        System.out.println("Contingut del carro:");
-        for(Producte p : productes){
-            System.out.println(p.getNom() + " - Codi: " + p.getCodiBarres());
+        System.out.println("\n-- CARRET DE LA COMPRA --");
+        // Agrupo productes repetits per codi de barres
+        Map<String, Integer> quantitats = new LinkedHashMap<>();
+        Map<String, Producte> unics = new LinkedHashMap<>();
+
+        for (Producte p : productes) {
+            String key = p.getCodiBarres();
+            unics.putIfAbsent(key, p);
+            quantitats.put(key, quantitats.getOrDefault(key, 0) + 1);
         }
+
+        System.out.printf("%-15s %-15s %-10s\n", "Nom", "Codi de barres", "Unitats");
+        for (String key : unics.keySet()) {
+            Producte p = unics.get(key);
+            int q = quantitats.get(key);
+            System.out.printf("%-15s %-15s %-10d\n", p.getNom(), p.getCodiBarres(), q);
+        }
+        System.out.println();
     }
 
-    // Genero el tiquet i buido el carret
+    // Genero el tiquet de compra
     public void passarPerCaixa() {
-        System.out.println("=== Tiquet de compra ===");
+        if (productes.isEmpty()) {
+            System.out.println("El carret està buit!\n");
+            return;
+        }
 
-        Map<String, Integer> quantitats = new HashMap<>();
-        Map<String, Producte> unics = new HashMap<>();
+        System.out.println("\n---------------------------");
+        System.out.println("SAPAMERCAT");
+        System.out.println("---------------------------");
 
-        // Agafar productes únics per codi+preu i comptar quantitats
-        for(Producte p : productes){
-            String key = p.getCodiBarres() + "-" + p.calcularPreu();
+        String dataCompra = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        System.out.println("Data: " + dataCompra);
+        System.out.println("---------------------------");
+
+        Map<String, Integer> quantitats = new LinkedHashMap<>();
+        Map<String, Producte> unics = new LinkedHashMap<>();
+
+        for (Producte p : productes) {
+            String key = p.getCodiBarres() + "-" + String.format("%.2f", p.calcularPreu());
             unics.putIfAbsent(key, p);
-            quantitats.put(key, quantitats.getOrDefault(key, 0)+1);
+            quantitats.put(key, quantitats.getOrDefault(key, 0) + 1);
         }
 
         double total = 0;
-        for(String key : unics.keySet()){
+        for (String key : unics.keySet()) {
             Producte p = unics.get(key);
             int q = quantitats.get(key);
-            double preuUnit = p.calcularPreu();
-            double subtotal = preuUnit * q;
+            double preuUnit = Math.round(p.calcularPreu() * 100.0) / 100.0;
+            double subtotal = Math.round(preuUnit * q * 100.0) / 100.0;
             total += subtotal;
 
-            // Arrodonim a 2 decimals
-            System.out.printf("%s x%d - %.2f€/unitat - Total: %.2f€\n",
+            System.out.printf("%-10s %2d    %8.2f      %8.2f\n",
                     p.getNom(), q, preuUnit, subtotal);
         }
 
-        System.out.printf("TOTAL A PAGAR: %.2f€\n", total);
+        total = Math.round(total * 100.0) / 100.0;
+        System.out.println("\nTotal: " + total + "€" +"\n");
+
+        // Buidem el carret després de passar per caixa
         productes.clear();
     }
 }
