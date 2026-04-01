@@ -38,20 +38,19 @@ Els productes disponibles són:
 ## Estructura del projecte (MVC)
 Sapamercat
 ├── model
-│ ├── Producte.java
-│ ├── Alimentacio.java
-│ ├── Textil.java
-│ ├── Electronica.java
-│ └── CarretCompra.java
+│   ├── Producte.java
+│   ├── Alimentacio.java
+│   ├── Textil.java
+│   ├── Electronica.java
+│   └── CarretCompra.java
 ├── Vista
-│ └── Vista.java
+│   └── Vista.java
 ├── Controlador
-│ └── Controlador.java
+│   └── Controlador.java
 ├── Main.java
 ├── TextilComparator.java
 ├── README.md
 └── .gitignore
-
 
 ## Tecnologies i tècniques
 - Java 17
