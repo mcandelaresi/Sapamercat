@@ -7,7 +7,7 @@ import java.util.Scanner;
 // Classe per mostrar menús i interacció amb l’usuari
 public class Vista {
 
-    Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in);
 
     public void menuPrincipal(){
         System.out.println("BENVINGUT AL SAPAMERCAT");
