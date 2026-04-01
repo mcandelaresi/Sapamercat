@@ -1,10 +1,10 @@
 package Model;
 
-public abstract class Producte {
+public abstract class Producte implements Comparable<Producte>{
 
-    private String nom;
-    private double preu;
-    private String codiBarres;
+    protected String nom;
+    protected double preu;
+    protected String codiBarres;
 
     public Producte(String nom, double preu, String codiBarres){
         this.nom = nom;
@@ -12,19 +12,35 @@ public abstract class Producte {
         this.codiBarres = codiBarres;
     }
 
-    public String getNom(){
+    public String getNom() {
         return nom;
     }
 
-    public double getPreu(){
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public double getPreu() {
         return preu;
     }
 
-    public String getCodiBarres(){
+    public void setPreu(double preu) {
+        this.preu = preu;
+    }
+
+    public String getCodiBarres() {
         return codiBarres;
+    }
+
+    public void setCodiBarres(String codiBarres) {
+        this.codiBarres = codiBarres;
     }
 
     // He posat abstracte el metod calcularPreu perquè cada tipus de producte tindra una manera diferent de calcular el preu.
     public abstract double calcularPreu();
+
+    public int compareTo(Producte o) {
+        return this.nom.compareTo(o.nom);
+    }
 
 }
