@@ -1,29 +1,26 @@
 package Model;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-// He creat la classe Alimentacio que extén Producte i té data de caducitat
+// Classe Alimentacio que hereta de Producte
 public class Alimentacio extends Producte{
 
-    private LocalDate dataCaducitat;
+    private int diesCaducitat; // Dies que falten per caducar
 
-    public Alimentacio(String nom, double preu, String codiBarres, String dataCaducitat){
+    public Alimentacio(String nom, double preu, String codiBarres, int diesCaducitat){
         super(nom, preu, codiBarres);
-        // Converteixo la data de string a LocalDate
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.dataCaducitat = LocalDate.parse(dataCaducitat, df);
+        this.diesCaducitat = diesCaducitat;
     }
 
-    public LocalDate getDataCaducitat() { return dataCaducitat; }
-    public void setDataCaducitat(LocalDate dataCaducitat) { this.dataCaducitat = dataCaducitat; }
+    public int getDiesCaducitat() {
+        return diesCaducitat;
+    }
 
-    // Aquí calculo el preu segons els dies que falten per caducar
+    public void setDiesCaducitat(int diesCaducitat) {
+        this.diesCaducitat = diesCaducitat;
+    }
+
     @Override
     public double calcularPreu() {
-        LocalDate avui = LocalDate.now();
-        long diesRestants = java.time.temporal.ChronoUnit.DAYS.between(avui, dataCaducitat);
-        if(diesRestants < 0) diesRestants = 0; // No poden ser negatius
-        return preu - preu*(1.0/(diesRestants+1)) + (preu*0.1);
+        // Preu ajustat segons dies que falten per caducar
+        return getPreu() - getPreu()*(1.0/(diesCaducitat+1)) + (getPreu()*0.1);
     }
 }

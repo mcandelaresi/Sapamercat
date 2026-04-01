@@ -17,25 +17,22 @@ public class CarretCompra {
         productes.add(p);
     }
 
-    // Mostro productes amb la sortida que vols
+    // Mostro productes amb la sortida
     public void mostrarCarret() {
-        System.out.println("-- CARRET DE LA COMPRA --");
+        System.out.println("Contingut del carro:");
         for(Producte p : productes){
-            System.out.println(p.getNom() + "  " + p.getCodiBarres());
+            System.out.println(p.getNom() + " - Codi: " + p.getCodiBarres());
         }
     }
 
     // Genero el tiquet i buido el carret
     public void passarPerCaixa() {
-        System.out.println("---------------------------");
-        System.out.println("SAPAMERCAT");
-        System.out.println("---------------------------");
-        System.out.println("Data: " + java.time.LocalDate.now());
-        System.out.println("--------------------------");
+        System.out.println("=== Tiquet de compra ===");
 
         Map<String, Integer> quantitats = new HashMap<>();
         Map<String, Producte> unics = new HashMap<>();
 
+        // Agafar productes únics per codi+preu i comptar quantitats
         for(Producte p : productes){
             String key = p.getCodiBarres() + "-" + p.calcularPreu();
             unics.putIfAbsent(key, p);
@@ -46,12 +43,16 @@ public class CarretCompra {
         for(String key : unics.keySet()){
             Producte p = unics.get(key);
             int q = quantitats.get(key);
-            double subtotal = q * p.calcularPreu();
+            double preuUnit = p.calcularPreu();
+            double subtotal = preuUnit * q;
             total += subtotal;
-            System.out.printf("%-8s %d %.3f %.3f\n", p.getNom(), q, p.calcularPreu(), subtotal);
+
+            // Arrodonim a 2 decimals
+            System.out.printf("%s x%d - %.2f€/unitat - Total: %.2f€\n",
+                    p.getNom(), q, preuUnit, subtotal);
         }
 
-        System.out.println("\nTotal: " + total);
+        System.out.printf("TOTAL A PAGAR: %.2f€\n", total);
         productes.clear();
     }
 }

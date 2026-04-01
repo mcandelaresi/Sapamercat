@@ -1,11 +1,7 @@
 package Vista;
 
-import Model.*;
-
-import java.util.Scanner;
-
-// Classe per mostrar menús i interacció amb l’usuari
 public class Vista {
+<<<<<<< HEAD
 
     public Scanner sc = new Scanner(System.in);
 
@@ -66,3 +62,6 @@ public class Vista {
         return new Electronica(nom, preu, codi, dies);
     }
 }
+=======
+}
+>>>>>>> parent of 0e8d823 (Comentades totes les funcions i codi en primera persona per claritat)
