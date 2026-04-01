@@ -1,5 +1,6 @@
 package Model;
 
+// Classe Textil que hereda de Producte
 public class Textil extends Producte{
 
     private String composicio;
@@ -9,12 +10,17 @@ public class Textil extends Producte{
         this.composicio = composicio;
     }
 
-    public String getComposicio(){
+    public String getComposicio() {
         return composicio;
     }
 
+    public void setComposicio(String composicio) {
+        this.composicio = composicio;
+    }
+
+    // Per Textil, el preu és simplement el preu base
     @Override
-    public double calcularPreu(){
+    public double calcularPreu() {
         return getPreu();
     }
 }
