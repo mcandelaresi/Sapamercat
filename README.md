@@ -37,7 +37,6 @@ Els productes disponibles són:
 
 ## 📁 Estructura del projecte
 ```
-plaintext
 sapamercat/
 ├── controlador/
 │   └── Controlador.java      # Lògica del control i menús
